@@ -8,7 +8,7 @@ variables:
   OUTPUT_PATH: platforms/android/app/build/outputs/apk/debug/app-debug.apk
 
 deploy-android:
-  image: andres2014/android-build
+  image: andres2014/android-build:part1
   stage: deploy
   only: [master]
   script:
