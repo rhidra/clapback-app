@@ -10,7 +10,7 @@ variables:
 deploy-android:
   image:
     name: gradle:4.10.0-jdk8
-    #entrypoint: ['run -u 0 -it gradle:4.10.0-jdk8 /bin/bash']
+    entrypoint: ['bash', '-c', 'exec su root -c bash']
   stage: deploy
   only: [master]
   script:
