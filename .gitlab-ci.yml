@@ -5,6 +5,7 @@ variables:
   ANDROID_HOME: /usr/local/android-sdk
   ANDROID_VERSION: 28
   ANDROID_BUILD_TOOLS_VERSION: 27.0.3
+  NVM_DIR: ~/.nvm
   OUTPUT_PATH: platforms/android/app/build/outputs/apk/debug/app-debug.apk
 
 deploy-android:
@@ -12,8 +13,12 @@ deploy-android:
   stage: deploy
   only: [master]
   script:
-    - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
-    - exec bash
+    #- curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
+    - curl https://raw.githubusercontent.com/creationix/nvm/v0.20.0/install.sh | bash \
+      && . $NVM_DIR/nvm.sh \
+      && nvm install $NODE_VERSION \
+      && nvm alias default $NODE_VERSION \
+      && nvm use default
     - nvm install node
     - nvm use node
 
