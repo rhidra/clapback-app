@@ -10,11 +10,11 @@ variables:
 deploy-android:
   image:
     name: gradle:4.10.0-jdk8
-    #entrypoint: ['run -u 0 -it gradle:4.10.0-jdk8 /bin/bash']
+    entrypoint: ['run -u 0 -it gradle:4.10.0-jdk8 /bin/bash']
   stage: deploy
   only: [master]
   script:
-    - mkdir $ANDROID_HOME .android
+    - sudo mkdir $ANDROID_HOME .android
     - cd $ANDROID_HOME
 
     # Download Android SDK
