@@ -8,12 +8,14 @@ variables:
   OUTPUT_PATH: platforms/android/app/build/outputs/apk/debug/app-debug.apk
 
 deploy-android:
-  image:
-    name: gradle:4.10.0-jdk8
-    entrypoint: ['bash', '-c', 'exec su root -c bash']
+  image: andres2014/android-build
+  #image:
+  #  name: gradle:4.10.0-jdk8
+  #  entrypoint: ['bash', '-c', 'exec su root -c bash']
   stage: deploy
   only: [master]
   script:
+    """
     - sudo mkdir $ANDROID_HOME .android
     - cd $ANDROID_HOME
 
@@ -22,14 +24,14 @@ deploy-android:
     - unzip sdk.zip
     - rm sdk.zip
     - mkdir $ANDROID_HOME/licenses
-    - echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > "$ANDROID_HOME/licenses/android-sdk-license"
+    - echo '24333f8a63b6825ea9c5514f83c2829b004d1fee' > '$ANDROID_HOME/licenses/android-sdk-license'
     - yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses
 
     # Install Android build tool and libraries
     - $ANDROID_HOME/tools/bin/sdkmanager --update
-    - $ANDROID_HOME/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" "platforms;android-${ANDROID_VERSION}" "platform-tools"
+    - $ANDROID_HOME/tools/bin/sdkmanager 'build-tools;${ANDROID_BUILD_TOOLS_VERSION}' 'platforms;android-${ANDROID_VERSION}' 'platform-tools'
     - apt-get update && apt-get install build-essential -y && apt-get install file -y && apt-get install apt-utils -y
-
+    """
     # Install node
     - cd ~
     - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
