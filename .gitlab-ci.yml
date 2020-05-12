@@ -1,4 +1,6 @@
-# Deploy automatically using Gitlab CI
+# Deploy automatically the app using Gitlab CI
+# Builds the app using a custom Docker image for Ionic Android build
+# Sends the APK file to a Slack channel for sharing
 
 variables:
   SDK_URL: https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
