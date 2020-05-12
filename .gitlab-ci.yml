@@ -3,10 +3,11 @@
 variables:
   SDK_URL: https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
   ANDROID_HOME: /usr/local/android-sdk
+  ANDROID_SDK_ROOT: /usr/local/android-sdk
   ANDROID_VERSION: 28
   ANDROID_BUILD_TOOLS_VERSION: 27.0.3
   NVM_DIR: ~/.nvm
-  OUTPUT_PATH: platforms/android/app/build/outputs/apk/debug/app-debug.apk
+  OUTPUT_PATH: /builds/remy.hidra/zuoyou-app/platforms/android/app/build/outputs/apk/debug/app-debug.apk
 
 deploy-android:
   image: rhidra/ionic-build:latest
@@ -17,4 +18,4 @@ deploy-android:
     - ionic cordova build android --prod --debug
 
     # Send the APK file to Slack
-    - curl -F file=$OUTPUT_PATH -F channels=#sentry -F token=$SLACK_TOKEN https://slack.com/api/files.upload
+    - curl -F file=@$OUTPUT_PATH -F channels=#sentry -F token=$SLACK_TOKEN https://slack.com/api/files.upload
