@@ -13,10 +13,6 @@ deploy-android:
   stage: deploy
   only: [master]
   script:
-    # Install frameworks
-    - npm i -g @ionic/cli
-    - npm i -g cordova
-
     # Build the APK
     - ionic cordova build android --prod --debug
 
