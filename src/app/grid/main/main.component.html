@@ -14,38 +14,48 @@
 
 <ion-content class="app-grid-main full-height" *ngIf="!isLoading">
   <div class="header">
-    <div class="margin-bottom">
+    <div>
       <ion-avatar class="margin pointer" [appMediaUpload]="isOwn" (uploadDone)="uploadNewProfilePic($event)">
         <img [src]="user.image ? (host + user.image + '?width=80&height=80') : '/assets/img/avatar.png'" alt="Avatar"/>
       </ion-avatar>
 
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <span class="counter">{{user.clapbacksCounter}}</span>
-            <ion-icon class="fix-pos" color="primary" name="chatbubbles"></ion-icon><br/>
-            <span class="text">Clapbacks</span>
-          </ion-col>
-          <ion-col>
-            <span class="counter">{{user.viewsCounter}}</span>
-            <ion-icon class="fix-pos" color="primary" name="eye"></ion-icon><br/>
-            <span class="text">Views</span>
-          </ion-col>
-          <ion-col>
-            <span class="counter">{{user.likesCounter}}</span>
-            <ion-icon class="fix-pos" color="primary" name="heart"></ion-icon><br/>
-            <span class="text">Likes</span>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <div class="user-stats">
+        <ion-button *ngIf="!isOwn && !user.isFollowing">Follow</ion-button>
+        <ion-button *ngIf="!isOwn && user.isFollowing" color="medium">Unfollow</ion-button>
+
+        <ion-grid [ngClass]="{'offset-center-follow': isOwn}">
+          <ion-row>
+            <ion-col>
+              <span class="counter">{{user.clapbacksCounter}}</span>
+              <span class="text" i18n> Follow</span>
+            </ion-col>
+            <ion-col>
+              <span class="counter">{{user.likesCounter}}</span>
+              <span class="text" i18n> Followers</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
     </div>
     <h2 class="margin-left">
       {{user.name}}
       <ion-icon class="fix-pos" name="checkmark-circle-outline" *ngIf="user.verified"></ion-icon>
     </h2>
 
-    <p [innerHTML]="user.description | bold | italic | hashtag | nl2br" class="margin-top-sm margin-left margin-right">
+    <p [innerHTML]="user.description | bold | italic | hashtag | nl2br" class="margin-top-sm margin-left margin-right margin-bottom-sm">
     </p>
+
+    <div class="margin-left margin-bottom other-stats">
+      <span class="counter">{{user.clapbacksCounter}}</span>
+      <ion-icon class="fix-pos fix-scale" color="primary" src="assets/icon/clap.svg"></ion-icon>&nbsp;&nbsp;&nbsp;
+
+      <span class="counter">{{user.viewsCounter}}</span>
+      <ion-icon class="fix-pos" color="primary" name="eye"></ion-icon>&nbsp;&nbsp;&nbsp;
+
+      <span class="counter">{{user.likesCounter}}</span>
+      <ion-icon class="fix-pos" color="primary" name="heart"></ion-icon>
+    </div>
   </div>
 
   <ion-grid class="reactions" *ngIf="!isLoadingReactions">

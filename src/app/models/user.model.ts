@@ -11,6 +11,8 @@ export class User {
 
     permissions: Array<string>;
 
+    isFollowing?: boolean;
+
     viewsCounter?: number;
     likesCounter?: number;
     clapbacksCounter?: number;
