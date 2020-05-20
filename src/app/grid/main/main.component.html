@@ -20,8 +20,8 @@
       </ion-avatar>
 
       <div class="user-stats">
-        <ion-button *ngIf="!isOwn && !user.isFollowing">Follow</ion-button>
-        <ion-button *ngIf="!isOwn && user.isFollowing" color="medium">Unfollow</ion-button>
+        <ion-button *ngIf="!isOwn && !user.isFollowing" (click)="userService.follow(user)">Follow</ion-button>
+        <ion-button *ngIf="!isOwn && user.isFollowing" (click)="userService.unfollow(user)" color="medium">Unfollow</ion-button>
 
         <ion-grid [ngClass]="{'offset-center-follow': isOwn}">
           <ion-row>

@@ -27,4 +27,22 @@ export class UserService {
       });
     });
   }
+
+  follow(user: User): Promise<void> {
+    return new Promise<void>(resolve => {
+      this.http.post(env.apiUrl + 'follow', {following: user._id}).subscribe(() => {
+        user.isFollowing = true;
+        resolve();
+      });
+    });
+  }
+
+  unfollow(user: User): Promise<void> {
+    return new Promise<void>(resolve => {
+      this.http.delete(env.apiUrl + 'follow/' + user._id).subscribe(() => {
+        user.isFollowing = false;
+        resolve();
+      });
+    });
+  }
 }
