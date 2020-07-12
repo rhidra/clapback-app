@@ -41,7 +41,7 @@
     "cordova-plugin-androidx": "1.0.2",
     "cordova-plugin-androidx-adapter": "1.1.0",
     "cordova-plugin-background-upload": "1.1.0",
-    "cordova-plugin-badge": "^0.8.8",
+    "cordova-plugin-badge": "~0.8.8",
     "cordova-plugin-file": "~6.0.2",
     "cordova-plugin-file-transfer": "~1.7.1",
     "cordova-plugin-filechooser": "~1.2.0",
