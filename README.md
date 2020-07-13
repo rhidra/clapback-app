@@ -65,8 +65,15 @@ You can check if the phone is correctly connected with `adb devices`.
 
 ## Compile APK
 
-For Android, use debug to install without signing the APK.
+To setup correctly the resources (icon + splash), use :
+```shell script
+# Install this first
+npm i -g cordova-res
 
+ionic cordova resources
+```
+
+For Android, use debug to install without signing the APK.
 ```shell script
 ionic cordova build android --prod --debug
 ```
