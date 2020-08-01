@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ActivityRoutingModule } from './activity-routing.module';
 import {ActivitySearchComponent} from "./search/search.component";
 import {IonicModule} from "@ionic/angular";
+import {UtilsModule} from "../utils/utils.module";
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import {IonicModule} from "@ionic/angular";
   imports: [
     CommonModule,
     ActivityRoutingModule,
-    IonicModule
+    IonicModule,
+    UtilsModule,
   ]
 })
 export class ActivityModule { }

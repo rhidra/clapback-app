@@ -9,5 +9,19 @@
 </ion-header>
 
 <ion-content class="app-activity-search">
+  <ion-list *ngIf="!isLoading">
+    <ion-item *ngFor="let reaction of reactionService.reactions">
+      <ion-avatar slot="start">
+        <img [src]="reaction.user.image ? (host + reaction.user.image) : '/assets/img/avatar.png'" alt="Avatar">
+      </ion-avatar>
+      <ion-label>
+        <p i18n class="main-label ion-text-wrap"><strong>{{reaction.user.name}}</strong> published a clapback</p>
+        <p class="hashtags">
+          <span *ngFor="let tag of reaction.hashtags">#{{tag}} </span>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
+  <app-empty-view *ngIf="isLoading" spinner="true"></app-empty-view>
 </ion-content>

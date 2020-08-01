@@ -83,6 +83,17 @@ export class ReactionService {
     });
   }
 
+  searchByUserFollow(userId: string): Promise<void> {
+    return this.authService.getToken().then(() => {
+      return new Promise<void>((resolve, reject) => {
+        this.http.get(env.apiUrl + 'reaction', {params: {populate: true, userFollow: userId}} as any).subscribe((data: any) => {
+          this.reactions = data;
+          resolve();
+        }, () => reject());
+      });
+    });
+  }
+
   searchByQuery(query: Query): Promise<void> {
     return this.authService.getToken().then(() => {
       return new Promise<void>((resolve, reject) => {
