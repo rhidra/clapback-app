@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'reaction', loadChildren: () => import('./reaction/reaction.module').then(m => m.ReactionModule) },
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
   { path: 'grid', loadChildren: () => import('./grid/grid.module').then(m => m.GridModule) },
+  { path: 'activity', loadChildren: () => import('./activity/activity.module').then(m => m.ActivityModule) },
 ];
 
 @NgModule({
