@@ -2,10 +2,11 @@
   ion-label {
     .main-label {
       color: black;
+      font-size: font-size($small-text);
     }
 
     .hashtags {
-      font-size: font-size($small-text);
+      font-size: font-size($very-small-text);
     }
   }
 }
