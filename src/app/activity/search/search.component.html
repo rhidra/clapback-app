@@ -10,18 +10,26 @@
 
 <ion-content class="app-activity-search">
   <ion-list *ngIf="!isLoading">
-    <ion-item *ngFor="let reaction of reactionService.reactions">
+    <ion-item *ngFor="let reaction of reactionService.reactions" [routerLink]="['/', 'reaction', 'detail', reaction._id]">
       <ion-avatar slot="start">
         <img [src]="reaction.user.image ? (host + reaction.user.image) : '/assets/img/avatar.png'" alt="Avatar">
       </ion-avatar>
       <ion-label>
-        <p i18n class="main-label ion-text-wrap"><strong>{{reaction.user.name}}</strong> published a clapback</p>
+        <p i18n class="main-label ion-text-wrap">
+          <strong>{{reaction.user.name}}</strong>
+          <span *ngIf="reaction.text"> published a clapback: "{{reaction.text}}"</span>
+          <span *ngIf="!reaction.text"> published a clapback.</span>
+        </p>
         <p class="hashtags">
           <span *ngFor="let tag of reaction.hashtags">#{{tag}} </span>
         </p>
       </ion-label>
     </ion-item>
   </ion-list>
+
+  <app-empty-view *ngIf="!isLoading && reactionService.reactions.length === 0"
+                  i18n-text text="There is nothing here !">
+  </app-empty-view>
 
   <app-empty-view *ngIf="isLoading" spinner="true"></app-empty-view>
 </ion-content>
