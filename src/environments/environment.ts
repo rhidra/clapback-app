@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://192.168.0.13:9000/',
-  mediaHost: 'http://192.168.0.13:9000',
+  apiUrl: 'http://192.168.0.16:9000/',
+  mediaHost: 'http://192.168.0.16:9000',
 };
 
 /*
