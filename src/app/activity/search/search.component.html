@@ -15,10 +15,10 @@
         <img [src]="reaction.user.image ? (host + reaction.user.image) : '/assets/img/avatar.png'" alt="Avatar">
       </ion-avatar>
       <ion-label>
-        <p i18n class="main-label ion-text-wrap">
+        <p class="main-label ion-text-wrap">
           <strong>{{reaction.user.name}}</strong>
-          <span *ngIf="reaction.text"> published a clapback: "{{reaction.text}}"</span>
-          <span *ngIf="!reaction.text"> published a clapback.</span>
+          <span *ngIf="reaction.text" i18n> published a clapback: "{{reaction.text}}"</span>
+          <span *ngIf="!reaction.text" i18n> published a clapback.</span>
         </p>
         <p class="hashtags">
           <span *ngFor="let tag of reaction.hashtags">#{{tag}} </span>
