@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ReactionService} from '../reaction.service';
 import {Reaction} from '../../models/reaction.model';
@@ -8,6 +8,8 @@ import {AuthService} from '../../auth/auth.service';
 import {CommentService} from '../comment.service';
 import {animate, keyframes, state, style, transition, trigger} from '@angular/animations';
 import {User} from '../../models/user.model';
+
+declare var Hls;
 
 @Component({
   selector: 'app-reaction-detail',
@@ -30,7 +32,10 @@ import {User} from '../../models/user.model';
     ])
   ]
 })
-export class ReactDetailComponent implements OnInit {
+export class ReactDetailComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('media', {static: false}) video: any;
+  hls: any;
 
   isLoading: boolean = true;
   isLoadingComments: boolean = true;
@@ -48,17 +53,17 @@ export class ReactDetailComponent implements OnInit {
     public commentService: CommentService,
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngAfterViewInit() {
     this.activatedRoute.params.subscribe(params => {
       const id = params.id;
       if (id) {
         this.authService.getToken()
           .then(token => this.reactionService.get(id))
-          .then(reaction => {
-            this.reaction = reaction;
-            this.isLoading = false;
-            return Promise.resolve();
-          })
+          .then(reaction => this.reaction = reaction)
+          .then(() => this.isLoading = false)
+          .then(() => this.loadVideo())
           .then(() => this.commentService.searchByReaction(id))
           .then(() => this.isLoadingComments = false)
           .then(() => this.authService.onAuthenticated())
@@ -66,6 +71,22 @@ export class ReactDetailComponent implements OnInit {
           .catch(() => {});
       }
     });
+  }
+
+  loadVideo() {
+    if (Hls.isSupported() && this.video) {
+      this.hls = new Hls();
+      this.hls.attachMedia(this.video.nativeElement);
+      this.hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+        this.hls.loadSource(this.host + this.reaction.video);
+      });
+      this.hls.on(Hls.Events.ERROR, function (event, data) {
+        console.error('event', event);
+        console.error('data', data);
+      });
+    } else if (!Hls.isSupported()) {
+      console.error('Hls is not supported !');
+    }
   }
 
   onPlayerReady(api: VgAPI) {

@@ -14,13 +14,13 @@
 
 <ion-content class="app-reaction-detail">
 
-  <div class="video-detail" *ngIf="!isLoading">
+  <div class="video-detail">
 
     <div [@heart]="heartState" class="heart-animation">
       <ion-icon name="heart"></ion-icon>
     </div>
     
-    <div class="full-video-side-buttons">
+    <div class="full-video-side-buttons" *ngIf="!isLoading">
       <div>
         <ion-button>
           <ion-icon slot="icon-only" name="share"></ion-icon>
@@ -50,12 +50,13 @@
         <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
       </vg-scrub-bar>
 
-      <video [vgMedia]="media" #media preload="auto" autoplay>
-        <source [src]="host + reaction.video" type="video/mp4">
+      <video [vgMedia]="media" #media
+             preload="auto" autoplay
+             type="video/mp4">
       </video>
     </vg-player>
 
-    <div class="video-footer">
+    <div class="video-footer" *ngIf="!isLoading">
       
       <div class="video-name pointer" [routerLink]="['/', 'grid', reaction.user._id]">
         <ion-avatar>
