@@ -18,8 +18,9 @@
         <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
       </vg-scrub-bar>
 
-      <video [vgMedia]="media" #media preload="auto" autoplay>
-        <source [src]="host + panel.video" type="video/mp4">
+      <video [vgMedia]="media" #media
+             type="video/mp4"
+             preload="auto">
       </video>
     </vg-player>
   </div>

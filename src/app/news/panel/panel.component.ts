@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, NgZone, OnInit} from '@angular/core';
+import {AfterViewInit, Component, HostListener, Input, NgZone, OnInit, ViewChild} from '@angular/core';
 import {VgAPI} from 'videogular2/compiled/src/core/services/vg-api';
 import {TopicPanel} from '../../models/topic.model';
 import {QuizService} from '../quiz.service';
@@ -6,11 +6,13 @@ import {Quiz} from '../../models/quiz.model';
 import {AuthService} from '../../auth/auth.service';
 import {environment as env} from '../../../environments/environment';
 
+declare var Hls;
+
 @Component({
   selector: 'app-news-panel',
   templateUrl: './panel.component.html',
 })
-export class PanelComponent implements OnInit {
+export class PanelComponent implements OnInit, AfterViewInit {
   
   _panel: TopicPanel;
   @Input()
@@ -23,8 +25,10 @@ export class PanelComponent implements OnInit {
   }
   get panel(): TopicPanel { return this._panel; }
 
+  @ViewChild('media', {static: false}) video: any;
+  hls: any;
+
   type: string;
-  video: string;
   tappingText: boolean = false;
   videoPlayer: VgAPI = null;
   quiz: Quiz;
@@ -41,6 +45,22 @@ export class PanelComponent implements OnInit {
   ) { }
 
   ngOnInit() {}
+
+  ngAfterViewInit() {
+    if (Hls.isSupported() && this.type === 'video' && this.video) {
+      this.hls = new Hls();
+      this.hls.attachMedia(this.video.nativeElement);
+      this.hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+        this.hls.loadSource(this.host + this.panel.video);
+      });
+      this.hls.on(Hls.Events.ERROR, function (event, data) {
+        console.error('event', event);
+        console.error('data', data);
+      });
+    } else if (!Hls.isSupported()) {
+      console.error('Hls is not supported !');
+    }
+  }
 
   onPlayerReady(api: VgAPI) {
     this.videoPlayer = api;

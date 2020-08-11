@@ -37,10 +37,11 @@
               },
               {
                 "input": "src/global.scss"
-              },
+              }
             ],
             "scripts": [
-              "node_modules/swiper/js/swiper.js"
+              "node_modules/swiper/js/swiper.js",
+              "node_modules/hls.js/dist/hls.min.js"
             ]
           },
           "configurations": {
