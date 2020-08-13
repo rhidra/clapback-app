@@ -11,6 +11,7 @@ import {FormsModule} from '@angular/forms';
 import {EmptyViewComponent} from './empty-view/empty-view.component';
 import { MediaUploadDirective } from './media-upload/media-upload.directive';
 import { DoubleTapDirective } from './double-tap/double-tap.directive';
+import { MediaUrlPipe } from './pipes/media-url.pipe';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { DoubleTapDirective } from './double-tap/double-tap.directive';
     EmptyViewComponent,
     MediaUploadDirective,
     DoubleTapDirective,
+    MediaUrlPipe,
   ],
   exports: [
     BoldPipe,
@@ -31,6 +33,7 @@ import { DoubleTapDirective } from './double-tap/double-tap.directive';
     EmptyViewComponent,
     MediaUploadDirective,
     DoubleTapDirective,
+    MediaUrlPipe,
   ],
   imports: [
     CommonModule,

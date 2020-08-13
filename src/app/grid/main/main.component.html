@@ -16,7 +16,7 @@
   <div class="header">
     <div>
       <ion-avatar class="margin pointer" [appMediaUpload]="isOwn" (uploadDone)="uploadNewProfilePic($event)">
-        <img [src]="user.image ? (host + user.image + '?width=80&height=80') : '/assets/img/avatar.png'" alt="Avatar"/>
+        <img [src]="user.image | mediaUrl:'avatar':-1:80:80" alt="Avatar"/>
       </ion-avatar>
 
       <div class="user-stats">
@@ -61,7 +61,7 @@
   <ion-grid class="reactions" *ngIf="!isLoadingReactions">
     <ion-row>
       <ion-col size="4" *ngFor="let reaction of reactionService.reactions" [routerLink]="['/', 'reaction', 'detail', reaction._id]">
-        <ion-img [src]="host + reaction.video + '?thumbnail&width=150&height=200'"></ion-img>
+        <ion-img [src]="reaction.video | mediaUrl:'thumbnail':-1:150:200"></ion-img>
       </ion-col>
     </ion-row>
   </ion-grid>

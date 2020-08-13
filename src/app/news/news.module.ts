@@ -16,6 +16,7 @@ import {NewsFeedService} from './feed.service';
 import {QuizService} from './quiz.service';
 import {UtilsModule} from '../utils/utils.module';
 import {Nl2BrPipeModule} from 'nl2br-pipe';
+import {MediaUrlPipe} from "../utils/pipes/media-url.pipe";
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import {Nl2BrPipeModule} from 'nl2br-pipe';
   providers: [
     NewsFeedService,
     QuizService,
+    MediaUrlPipe,
   ]
 })
 export class NewsModule { }

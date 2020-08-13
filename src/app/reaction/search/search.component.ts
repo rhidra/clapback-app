@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ReactionService} from '../reaction.service';
 import {ActivatedRoute} from '@angular/router';
-import {environment as env} from '../../../environments/environment';
 import {CommentService} from '../comment.service';
 import {Query, QueryService} from '../../utils/query.service';
 import {IonSearchbar} from '@ionic/angular';
@@ -19,7 +18,6 @@ export class ReactSearchComponent implements OnInit {
   isLoading;
   noConnection: boolean = false;
   searchbarContent: string;
-  host = env.mediaHost;
 
   constructor(
     public reactionService: ReactionService,

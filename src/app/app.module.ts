@@ -24,6 +24,7 @@ import {ReactionService} from './reaction/reaction.service';
 import {LocalNotifications} from '@ionic-native/local-notifications/ngx';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HAMMER_GESTURE_CONFIG, HammerGestureConfig} from '@angular/platform-browser';
+import {UtilsModule} from "./utils/utils.module";
 
 @Injectable()
 export class CustomHammerConfig extends HammerGestureConfig {
@@ -45,6 +46,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     AppRoutingModule,
     NewsModule,
     FontAwesomeModule,
+    UtilsModule,
   ],
   providers: [
     ReactionService,

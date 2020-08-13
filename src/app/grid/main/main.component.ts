@@ -3,7 +3,6 @@ import {User} from '../../models/user.model';
 import {AuthService} from '../../auth/auth.service';
 import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../user.service';
-import {environment as env} from '../../../environments/environment';
 import {ReactionService} from '../../reaction/reaction.service';
 
 @Component({
@@ -16,7 +15,6 @@ export class GridMainComponent implements OnInit {
   isLoadingReactions = true;
   isOwn = false;
   user: User;
-  host = env.mediaHost;
 
   constructor(
     public authService: AuthService,

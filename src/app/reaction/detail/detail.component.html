@@ -60,7 +60,7 @@
       
       <div class="video-name pointer" [routerLink]="['/', 'grid', reaction.user._id]">
         <ion-avatar>
-          <img [src]="reaction.user.image ? (host + reaction.user.image + '?width=30&height=30') : '/assets/img/avatar.png'" alt="Avatar">
+          <img [src]="reaction.user.image | mediaUrl:'avatar':-1:30:30" alt="Avatar">
         </ion-avatar>
         <div class="margin-left-sm">
           <span>{{reaction.user.name}}</span>

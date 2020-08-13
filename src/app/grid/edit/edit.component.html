@@ -13,7 +13,7 @@
 
       <ion-item appMediaUpload (uploadDone)="form.patchValue({image: $event})">
         <ion-avatar slot="start">
-          <img [src]="form.value.image ? (host + form.value.image + '?width=50&height=50') : '/assets/img/avatar.png'" alt="Avatar"/>
+          <img [src]="form.value.image | mediaUrl:'avatar':-1:50:50" alt="Avatar"/>
         </ion-avatar>
         <ion-label i18n>Upload a profile pic</ion-label>
       </ion-item>

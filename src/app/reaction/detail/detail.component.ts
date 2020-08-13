@@ -8,6 +8,7 @@ import {AuthService} from '../../auth/auth.service';
 import {CommentService} from '../comment.service';
 import {animate, keyframes, state, style, transition, trigger} from '@angular/animations';
 import {User} from '../../models/user.model';
+import {MediaUrlPipe} from "../../utils/pipes/media-url.pipe";
 
 declare var Hls;
 
@@ -41,7 +42,6 @@ export class ReactDetailComponent implements OnInit, AfterViewInit {
   isLoadingComments: boolean = true;
   reaction: Reaction;
   videoPlayer: VgAPI;
-  host = env.mediaHost;
   comment: string;
   canEdit: boolean = false;
   heartState: string = 'notLiked';
@@ -51,6 +51,7 @@ export class ReactDetailComponent implements OnInit, AfterViewInit {
     public reactionService: ReactionService,
     public authService: AuthService,
     public commentService: CommentService,
+    public mediaUrl: MediaUrlPipe,
   ) { }
 
   ngOnInit() {}
@@ -78,7 +79,7 @@ export class ReactDetailComponent implements OnInit, AfterViewInit {
       this.hls = new Hls();
       this.hls.attachMedia(this.video.nativeElement);
       this.hls.on(Hls.Events.MEDIA_ATTACHED, () => {
-        this.hls.loadSource(this.host + this.reaction.video);
+        this.hls.loadSource(this.mediaUrl.transform(this.reaction.video, 'video'));
       });
       this.hls.on(Hls.Events.ERROR, function (event, data) {
         console.error('event', event);

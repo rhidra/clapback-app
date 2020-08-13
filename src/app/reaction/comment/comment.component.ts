@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Comment} from '../../models/comment.model';
-import {environment as env} from '../../../environments/environment';
 import {CommentService} from '../comment.service';
 import {AuthService} from '../../auth/auth.service';
 
@@ -10,7 +9,6 @@ import {AuthService} from '../../auth/auth.service';
 })
 export class ReactCommentComponent implements OnInit {
 
-  host = env.mediaHost;
   @Input() comment: Comment;
 
   constructor(

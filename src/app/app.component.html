@@ -3,7 +3,7 @@
     <ion-menu-toggle auto-hide="true">
       <ion-item *ngIf="authService.user" routerLink="/grid" class="menu-header margin-bottom">
         <ion-avatar slot="start">
-          <ion-img [src]="authService.user.image ? (host + authService.user.image + '?width=50&height=50') : '/assets/img/avatar.png'" alt="avatar"></ion-img>
+          <ion-img [src]="authService.user.image | mediaUrl:'avatar':-1:50:50" alt="avatar"></ion-img>
         </ion-avatar>
         <ion-label>
           <h3>{{authService.user.name}}</h3>

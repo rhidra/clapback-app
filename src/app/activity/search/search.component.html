@@ -12,7 +12,7 @@
   <ion-list *ngIf="!isLoading">
     <ion-item *ngFor="let reaction of reactionService.reactions" [routerLink]="['/', 'reaction', 'detail', reaction._id]">
       <ion-avatar slot="start">
-        <img [src]="reaction.user.image ? (host + reaction.user.image) : '/assets/img/avatar.png'" alt="Avatar">
+        <img [src]="reaction.user.image | mediaUrl:'image'" alt="Avatar">
       </ion-avatar>
       <ion-label>
         <p class="main-label ion-text-wrap">

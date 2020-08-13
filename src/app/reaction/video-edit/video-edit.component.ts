@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {environment as env} from '../../../environments/environment';
-import {HttpClient, HttpEventType} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Reaction} from '../../models/reaction.model';
 import * as moment from 'moment';
 import {AuthService} from '../../auth/auth.service';

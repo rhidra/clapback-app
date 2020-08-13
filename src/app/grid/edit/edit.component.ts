@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../user.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {environment as env} from '../../../environments/environment';
 import {User} from '../../models/user.model';
 import {AuthService} from '../../auth/auth.service';
 
@@ -14,7 +13,6 @@ export class GridEditComponent implements OnInit {
   isLoading = true;
   form: FormGroup;
   user: User;
-  host = env.mediaHost;
 
   constructor(
     private userService: UserService,

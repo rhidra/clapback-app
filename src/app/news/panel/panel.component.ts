@@ -4,7 +4,7 @@ import {TopicPanel} from '../../models/topic.model';
 import {QuizService} from '../quiz.service';
 import {Quiz} from '../../models/quiz.model';
 import {AuthService} from '../../auth/auth.service';
-import {environment as env} from '../../../environments/environment';
+import {MediaUrlPipe} from "../../utils/pipes/media-url.pipe";
 
 declare var Hls;
 
@@ -36,12 +36,12 @@ export class PanelComponent implements OnInit, AfterViewInit {
   isActive = false;
   isLoading = false;
   maxCount = 0;
-  host = env.mediaHost;
 
   constructor(
     private quizService: QuizService,
     private authService: AuthService,
     private ngZone: NgZone,
+    private mediaUrl: MediaUrlPipe,
   ) { }
 
   ngOnInit() {}
@@ -51,7 +51,7 @@ export class PanelComponent implements OnInit, AfterViewInit {
       this.hls = new Hls();
       this.hls.attachMedia(this.video.nativeElement);
       this.hls.on(Hls.Events.MEDIA_ATTACHED, () => {
-        this.hls.loadSource(this.host + this.panel.video);
+        this.hls.loadSource(this.mediaUrl.transform(this.panel.video, 'video'));
       });
       this.hls.on(Hls.Events.ERROR, function (event, data) {
         console.error('event', event);

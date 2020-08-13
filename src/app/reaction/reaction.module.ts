@@ -14,6 +14,7 @@ import {ReactCommentComponent} from './comment/comment.component';
 import {ReactAddCommentComponent} from './add-comment/add-comment.component';
 import {UtilsModule} from '../utils/utils.module';
 import {Nl2BrPipeModule} from 'nl2br-pipe';
+import {MediaUrlPipe} from "../utils/pipes/media-url.pipe";
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {Nl2BrPipeModule} from 'nl2br-pipe';
     Nl2BrPipeModule
   ],
   providers: [
+    MediaUrlPipe,
   ],
 })
 export class ReactionModule { }

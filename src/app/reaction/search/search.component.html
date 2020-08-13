@@ -18,11 +18,11 @@
     <ion-row>
       <ion-col size="6" *ngFor="let reaction of reactionService.reactions">
         <div class="img-card" [routerLink]="['/', 'reaction', 'detail', reaction._id]">
-          <img [src]="host + reaction.video + '?thumbnail'" alt="" class="full-width"/>
+          <img [src]="reaction.video | mediaUrl:'thumbnail'" alt="" class="full-width"/>
 
           <div class="card-footer">
             <ion-avatar class="avatar">
-              <img [src]="reaction.user.image ? (host + reaction.user.image) : '/assets/img/avatar.png'" alt="Avatar">
+              <img [src]="reaction.user.image | mediaUrl:'avatar'" alt="Avatar">
             </ion-avatar>
             <div class="content"
                  [innerHTML]="(reaction.text.length > 100 ? (reaction.text | slice:0:100) + '...' : reaction.text) | italic | bold | nl2br">
