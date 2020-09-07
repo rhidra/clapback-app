@@ -40,7 +40,6 @@ export class MediaUrlPipe implements PipeTransform {
         const [_, fileId, ext] = /^([a-zA-Z0-9\-]*)\.(.*)$/.exec(id);
         return `${env.apiUrl}media/image/${fileId}${opt}.${ext}`;
       case 'avatar':
-        console.log('Test d\'avatar pour ', id);
         if (!id) {
           return '/assets/img/avatar.png';
         }
