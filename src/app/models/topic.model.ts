@@ -6,7 +6,8 @@ export class Topic {
 
     hashtags: Array<string>;
     suggestedHashtags: Array<string>;
-    approved: boolean;
+    isPublic: boolean;
+    isProcessing: boolean;
     date: string;
 
     centerPanel: TopicPanel;
