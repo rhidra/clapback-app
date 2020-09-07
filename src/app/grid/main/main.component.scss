@@ -52,5 +52,16 @@
     ion-col {
       padding: 1px 1px;
     }
+
+    .loading-reaction {
+      border: 2px solid var(--ion-color-primary);
+      border-radius: 5px;
+      padding: 30px;
+      background-color: #f0ecec;
+
+      ion-spinner {
+        color: var(--ion-color-primary);
+      }
+    }
   }
 }

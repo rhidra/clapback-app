@@ -118,6 +118,7 @@ export class ReactVideoEditComponent implements OnInit {
     this.reaction.hashtags = this.form.value.hashtags;
     this.reaction.user = (this.authService.user._id as any);
     this.reaction.topic = this.topic._id;
+    this.reaction.isPublic = true;
 
     return this.reactionService.create(this.reaction)
       .then(() => this.notifications.schedule({id: 1, title: 'Clapback successfully published !'}));

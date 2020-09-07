@@ -71,10 +71,10 @@ export class ReactionService {
     });
   }
 
-  searchByUser(user: User): Promise<void> {
+  searchByUser(user: User, includeProcessing: boolean = false): Promise<void> {
     return this.authService.getToken().then(() => {
       return new Promise<void>((resolve, reject) => {
-        this.http.get(env.apiUrl + 'reaction', {params: {user: user._id}} as any).subscribe((data: any) => {
+        this.http.get(env.apiUrl + 'reaction', {params: {user: user._id, isProcessing: includeProcessing}} as any).subscribe((data: any) => {
           this.reactions = data;
           this.reactions.forEach(r => r.user = user);
           resolve();
