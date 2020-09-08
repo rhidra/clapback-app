@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   delay = 0;
 
   // Delay for the user to enter the SMS code
-  delaySize = 30;
+  delaySize = 60;
 
   // Firebase functions
   recaptchaVerifier: any;

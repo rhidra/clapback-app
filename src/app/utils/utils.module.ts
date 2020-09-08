@@ -12,6 +12,8 @@ import {EmptyViewComponent} from './empty-view/empty-view.component';
 import { MediaUploadDirective } from './media-upload/media-upload.directive';
 import { DoubleTapDirective } from './double-tap/double-tap.directive';
 import { MediaUrlPipe } from './pipes/media-url.pipe';
+import {IntlPhoneInputComponent} from './intl-phone-input/intl-phone-input.component';
+import {Ng2TelInputModule} from 'ng2-tel-input';
 
 
 @NgModule({
@@ -24,6 +26,7 @@ import { MediaUrlPipe } from './pipes/media-url.pipe';
     MediaUploadDirective,
     DoubleTapDirective,
     MediaUrlPipe,
+    IntlPhoneInputComponent,
   ],
   exports: [
     BoldPipe,
@@ -34,12 +37,14 @@ import { MediaUrlPipe } from './pipes/media-url.pipe';
     MediaUploadDirective,
     DoubleTapDirective,
     MediaUrlPipe,
+    IntlPhoneInputComponent,
   ],
   imports: [
     CommonModule,
     UtilsRoutingModule,
     IonicModule,
-    FormsModule
+    FormsModule,
+    Ng2TelInputModule,
   ],
 })
 export class UtilsModule { }

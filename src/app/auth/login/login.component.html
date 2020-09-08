@@ -10,9 +10,8 @@
 <ion-content class="app-login">
   <form [formGroup]="form" (ngSubmit)="login()" autocomplete="off">
     <ion-list inset padding>
-      <ion-item>
-        <ion-input placeholder="Phone number" i18n-placeholder formControlName="phone" type="text"></ion-input>
-      </ion-item>
+      <app-intl-phone-input formControlName="phone"></app-intl-phone-input>
+
       <ion-item>
         <ion-input placeholder="SMS Code" i18n-placeholder maxlength="6" formControlName="code" type="text"></ion-input>
         <ion-button i18n [disabled]="delay > 0 || form.controls['phone'].invalid" (click)="sendCode()">

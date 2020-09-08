@@ -1,0 +1,7 @@
+
+<input type="text"
+       ng2TelInput
+       [ng2TelInputOptions]="{initialCountry: 'cn'}"
+       (countryChange)="onCountryChange($event)"
+        [(ngModel)]="phone"
+        (ngModelChange)="onChange()"/>

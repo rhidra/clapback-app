@@ -37,11 +37,15 @@
               },
               {
                 "input": "src/global.scss"
+              },
+              {
+                "input": "node_modules/intl-tel-input/build/css/intlTelInput.css"
               }
             ],
             "scripts": [
               "node_modules/swiper/js/swiper.js",
-              "node_modules/hls.js/dist/hls.min.js"
+              "node_modules/hls.js/dist/hls.min.js",
+              "node_modules/intl-tel-input/build/js/intlTelInput.min.js"
             ]
           },
           "configurations": {
