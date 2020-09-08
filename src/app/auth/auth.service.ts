@@ -12,14 +12,10 @@ import {Location} from '@angular/common';
   providedIn: 'root'
 })
 export class AuthService {
-  delay = 0;
   pendingId: string;
   user: User;
   refreshToken: string;
   accessToken: string;
-
-  // Delay for the user to enter the SMS code (also exists in the auth API !)
-  delaySize = 30;
 
   getToken(): Promise<any> {
     return new Promise<string>(resolve => {
@@ -92,27 +88,6 @@ export class AuthService {
     });
   }
 
-  requestCode(phone: string): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      this.http.post(env.apiUrl + 'auth/phone/', {id: this.pendingId, phone}).subscribe((user: any) => {
-        this.pendingId = user.id;
-        this.startTimer();
-        resolve();
-      }, reject);
-    });
-  }
-
-  startTimer() {
-    this.delay = this.delaySize;
-    const timer = () => {
-      this.delay--;
-      if (this.delay > 0) {
-        setTimeout(timer, 1000);
-      }
-    };
-    timer();
-  }
-
   editUser(user: User): Promise<any> {
     Object.assign(this.user, user);
     if (this.platform.is('hybrid')) {
@@ -123,10 +98,9 @@ export class AuthService {
     }
   }
 
-  login(phone: string, code: string) {
+  login(phone: string, code: string, verificationId: string) {
     return new Promise((resolve, reject) => {
-      this.http.post(env.apiUrl + 'auth/phone/login', {id: this.pendingId, phone, code}).subscribe((res: any) => {
-        this.delay = 0;
+      this.http.post(env.apiUrl + 'auth/phone/login', {phone, code, verificationId}).subscribe((res: any) => {
         this.pendingId = '';
         this.refreshToken = res.refreshToken;
         this.user = new User();

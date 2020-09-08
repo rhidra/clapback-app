@@ -15,11 +15,13 @@
       </ion-item>
       <ion-item>
         <ion-input placeholder="SMS Code" i18n-placeholder maxlength="6" formControlName="code" type="text"></ion-input>
-        <ion-button i18n [disabled]="authService.delay > 0 || form.controls['phone'].invalid" (click)="sendCode()">
+        <ion-button i18n [disabled]="delay > 0 || form.controls['phone'].invalid" (click)="sendCode()">
           Send Code
-          <span *ngIf="authService.delay > 0">&nbsp;({{authService.delay}})</span>
+          <span *ngIf="delay > 0">&nbsp;({{delay}})</span>
         </ion-button>
       </ion-item>
+
+      <div id="recaptcha-container"></div>
 
       <div *ngIf="form.errors" class="alert alert-danger">{{form.errors}}</div>
       <ion-button class="submit-btn" expand="block" type="submit"

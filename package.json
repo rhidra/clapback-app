@@ -50,6 +50,7 @@
     "cordova-plugin-media-capture": "~3.0.3",
     "cordova-plugin-nativestorage": "~2.3.2",
     "core-js": "~2.6.0",
+    "firebase": "~7.19.1",
     "hammerjs": "~2.0.8",
     "hls.js": "~0.14.8",
     "jwt-decode": "~2.2.0",
@@ -113,8 +114,7 @@
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-file": {},
       "cordova-plugin-filepath": {},
-      "cordova-plugin-background-upload": {},
-      "cordova-plugin-local-notification": {}
+      "cordova-plugin-background-upload": {}
     },
     "platforms": [
       "browser",
