@@ -29,7 +29,7 @@ export class IntlPhoneInputComponent implements OnInit, ControlValueAccessor, Va
   ngOnInit() {}
 
   onChange() {
-    const full = this.dialCode + /0*([0-9]+)/.exec(this.phone)[1];
+    const full = this.dialCode + (/0*([0-9]+)/.exec(this.phone) || [null, ''])[1];
     this.propagateChange(full);
   }
 
