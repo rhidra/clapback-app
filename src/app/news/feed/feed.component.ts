@@ -27,23 +27,23 @@ export class NewsFeedComponent implements OnInit {
       private menuCtrl: MenuController,
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.isLoading = true;
-    this.authService.getToken().then(() => {
-      this.feedService.load().then(() => {
-        this.isLoading = false;
-        this.noConnection = false;
-        setTimeout(() => {
-          const topics = this.topicComponents.toArray();
-          if (topics[0]) {
-            topics[0].startViewing();
-          }
-        });
-      }).catch(() => {
-        this.isLoading = false;
-        this.noConnection = true;
+    await this.authService.getToken();
+    try {
+      await this.feedService.loadMore();
+      this.isLoading = false;
+      this.noConnection = false;
+      setTimeout(() => {
+        const topics = this.topicComponents.toArray();
+        if (topics[0]) {
+          topics[0].startViewing();
+        }
       });
-    });
+    } catch (err) {
+      this.isLoading = false;
+      this.noConnection = true;
+    }
   }
 
   ionViewDidEnter() {
@@ -58,10 +58,16 @@ export class NewsFeedComponent implements OnInit {
     this.slides.getActiveIndex().then(slideIndex => topics[slideIndex].stopViewing());
   }
 
-  slideChanged(event) {
+  async slideChanged(event) {
     const topics = this.topicComponents.toArray();
-    this.slides.getActiveIndex().then(slideIndex => topics[slideIndex].startViewing());
-    this.slides.getPreviousIndex().then(slideIndex => topics[slideIndex].stopViewing());
+    const idxActive = await this.slides.getActiveIndex();
+    topics[idxActive].startViewing();
+    const idxPrev = await this.slides.getPreviousIndex();
+    topics[idxPrev].stopViewing();
+
+    if (idxActive >= this.feedService.topics.length - 5) {
+      await this.feedService.loadMore();
+    }
   }
 
   menuClick() {

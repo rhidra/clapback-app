@@ -10,16 +10,30 @@ import {AuthService} from '../auth/auth.service';
 export class NewsFeedService {
 
   topics: Array<Topic> = [];
+  page: number = 0;
+  pageSize: number = 5;
+
+  reqPending: boolean = false;
 
   constructor(
       private http: HttpClient,
       private authService: AuthService,
   ) { }
 
-  load(): Promise<void> {
+  loadMore(): Promise<void> {
+    if (this.reqPending) { return; }
+    this.reqPending = true;
     return this.authService.getToken().then(() => new Promise((resolve, reject) =>
-      this.http.get(env.apiUrl + 'topic/', {params: {populate: true, isPublic: true}} as any).subscribe((data: any) => {
-        this.topics = data;
+      this.http.get(env.apiUrl + 'topic/', {params: {populate: true, isPublic: true, page: this.page, pageSize: this.pageSize}} as any).subscribe((data: any) => {
+        data.forEach(elem => {
+          if (!this.topics.find(e => e._id === elem._id)) {
+            this.topics.push(elem);
+          }
+        });
+        if (data.length !== 0) {
+          this.page++;
+          this.reqPending = false;
+        }
         resolve();
       }, () => reject())
     ));
