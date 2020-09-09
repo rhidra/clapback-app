@@ -70,9 +70,8 @@ export class NewsFeedComponent implements OnInit {
     }
   }
 
-  menuClick() {
-    this.authService.onAuthenticated(true).then(() => {
-      this.menuCtrl.toggle();
-    });
+  async menuClick() {
+    await this.authService.onAuthenticated(true);
+    await this.menuCtrl.toggle();
   }
 }
