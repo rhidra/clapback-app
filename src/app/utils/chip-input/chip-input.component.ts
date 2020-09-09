@@ -52,6 +52,7 @@ export class ChipInputComponent implements ControlValueAccessor {
       this.custom.add(tag);
     }
     this.input = '';
+    this.propagateChange([...this.selected]);
   }
 
   writeValue(obj: any): void {
