@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ReactionService} from '../reaction.service';
 import {ActivatedRoute} from '@angular/router';
-import {CommentService} from '../comment.service';
 import {Query, QueryService} from '../../utils/query.service';
 import {IonSearchbar} from '@ionic/angular';
 
@@ -22,16 +21,12 @@ export class ReactSearchComponent implements OnInit {
   constructor(
     public reactionService: ReactionService,
     public activatedRoute: ActivatedRoute,
-    public commentService: CommentService,
     public queryService: QueryService,
   ) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.idTopic = params.idTopic;
-      if (this.idTopic) {
-        this.commentService.searchByTopic(this.idTopic);
-      }
     });
     this.activatedRoute.queryParamMap.subscribe(query => {
       const q: Query = this.queryService.parseQuery(query);

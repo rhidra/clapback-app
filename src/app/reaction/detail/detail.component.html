@@ -89,10 +89,7 @@
         </li>
       </ul>
 
-      <div *ngIf="!isLoadingComments">
-        <app-reaction-comment *ngFor="let comment of commentService.reactionsComments.get(reaction._id)" [comment]="comment">
-        </app-reaction-comment>
-      </div>
+      <app-comment-list [reaction]="reaction._id"></app-comment-list>
     </div>
   </div>
   <app-empty-view *ngIf="isLoading" spinner="true"></app-empty-view>

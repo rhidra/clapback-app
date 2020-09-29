@@ -51,8 +51,8 @@
 
   <app-empty-view *ngIf="isLoading" spinner="true"></app-empty-view>
 
-  <app-reaction-comment *ngFor="let comment of commentService.topicsComments.get(idTopic)" [comment]="comment">
-  </app-reaction-comment>
+  <app-comment-list [topic]="idTopic">
+  </app-comment-list>
 </ion-content>
 
 <app-add-comment-footer *ngIf="idTopic" [topicId]="idTopic"></app-add-comment-footer>

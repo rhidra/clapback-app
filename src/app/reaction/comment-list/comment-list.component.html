@@ -1,0 +1,13 @@
+<div class="app-comment-list">
+  <div *ngIf="topic">
+    <app-reaction-comment *ngFor="let comment of commentService.topicsComments.get(topic)" [comment]="comment"></app-reaction-comment>
+  </div>
+  <div *ngIf="reaction">
+    <app-reaction-comment *ngFor="let comment of commentService.reactionsComments.get(reaction)" [comment]="comment"></app-reaction-comment>
+  </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</div>

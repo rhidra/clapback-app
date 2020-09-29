@@ -2,10 +2,8 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ReactionService} from '../reaction.service';
 import {Reaction} from '../../models/reaction.model';
-import {environment as env} from '../../../environments/environment';
 import {VgAPI} from 'videogular2/compiled/src/core/services/vg-api';
 import {AuthService} from '../../auth/auth.service';
-import {CommentService} from '../comment.service';
 import {animate, keyframes, state, style, transition, trigger} from '@angular/animations';
 import {User} from '../../models/user.model';
 import {MediaUrlPipe} from "../../utils/pipes/media-url.pipe";
@@ -39,7 +37,6 @@ export class ReactDetailComponent implements OnInit, AfterViewInit {
   hls: any;
 
   isLoading: boolean = true;
-  isLoadingComments: boolean = true;
   reaction: Reaction;
   videoPlayer: VgAPI;
   comment: string;
@@ -50,7 +47,6 @@ export class ReactDetailComponent implements OnInit, AfterViewInit {
     public activatedRoute: ActivatedRoute,
     public reactionService: ReactionService,
     public authService: AuthService,
-    public commentService: CommentService,
     public mediaUrl: MediaUrlPipe,
   ) { }
 
@@ -65,8 +61,6 @@ export class ReactDetailComponent implements OnInit, AfterViewInit {
           .then(reaction => this.reaction = reaction)
           .then(() => this.isLoading = false)
           .then(() => this.loadVideo())
-          .then(() => this.commentService.searchByReaction(id))
-          .then(() => this.isLoadingComments = false)
           .then(() => this.authService.onAuthenticated())
           .then(() => this.canEdit = this.authService.user._id === (this.reaction.user as User)._id)
           .catch(() => {});

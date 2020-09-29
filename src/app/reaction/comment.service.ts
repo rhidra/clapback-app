@@ -32,22 +32,26 @@ export class CommentService {
     });
   }
 
-  searchByTopic(idTopic: string): Promise<void> {
+  searchByTopic(idTopic: string, page: number = 0, pageSize: number = 10): Promise<void> {
     return this.authService.getToken().then(() => {
       return new Promise<void>(resolve => {
-        this.http.get(env.apiUrl + 'comment', {params: {populate: true, topic: idTopic}} as any).subscribe((data: any) => {
-          this.topicsComments.set(idTopic, data);
+        this.http.get(env.apiUrl + 'comment', {params: {populate: true, topic: idTopic, page, pageSize}} as any).subscribe((data: any) => {
+          const oldData = this.topicsComments.get(idTopic) || [];
+          data.forEach(c => !oldData.find(e => e._id === c._id) ? oldData.push(c) : null);
+          this.topicsComments.set(idTopic, oldData);
           resolve();
         });
       });
     }).catch(() => {});
   }
 
-  searchByReaction(idReaction: string): Promise<void> {
+  searchByReaction(idReaction: string, page: number = 0, pageSize: number = 10): Promise<void> {
     return this.authService.getToken().then(() => {
       return new Promise<void>(resolve => {
-        this.http.get(env.apiUrl + 'comment', {params: {populate: true, reaction: idReaction}} as any).subscribe((data: any) => {
-          this.reactionsComments.set(idReaction, data);
+        this.http.get(env.apiUrl + 'comment', {params: {populate: true, reaction: idReaction, page, pageSize}} as any).subscribe((data: any) => {
+          const oldData = this.reactionsComments.get(idReaction) || [];
+          data.forEach(c => !oldData.find(e => e._id === c._id) ? oldData.push(c) : null);
+          this.reactionsComments.set(idReaction, oldData);
           resolve();
         });
       });
