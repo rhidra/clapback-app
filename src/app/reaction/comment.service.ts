@@ -54,25 +54,23 @@ export class CommentService {
     });
   }
 
-  get(id: string): Promise<any> {
-    return this.authService.getToken().then(() => {
-      let comment: Comment = null;
-      for (const map of [this.topicsComments, this.reactionsComments]) {
-        for (const [_, comments] of map.entries()) {
-          const result = comments.find(r => r._id === id);
-          if (result) {
-            comment = result;
-            break;
-          }
+  async get(id: string) {
+    await this.authService.getToken();
+
+    for (const map of [this.topicsComments, this.reactionsComments]) {
+      for (const [_, comments] of map.entries()) {
+        const result = comments.find(r => r._id === id);
+        if (result) {
+          return result;
         }
-        if (comment) { break; }
       }
-      if (comment) {
-        return Promise.resolve(comment as any);
-      } else {
-        return new Promise<Comment>(r => this.http.get(env.apiUrl + 'comment/' + id).subscribe((data: any) => r(data)));
-      }
-    });
+    }
+
+    return new Promise<Comment>(r =>
+      this.http.get(env.apiUrl + 'comment/' + id).subscribe((data: any) => {
+        r(data);
+      })
+    );
   }
 
   checkLike(comment: Comment): Promise<boolean> {
