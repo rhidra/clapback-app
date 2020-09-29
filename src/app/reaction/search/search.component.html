@@ -41,6 +41,11 @@
     </ion-row>
   </ion-grid>
 
+  <ion-infinite-scroll threshold="10px" (ionInfinite)="loadMoreReactions($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
   <app-empty-view *ngIf="!isLoading && !noConnection && reactionService.reactions.length === 0"
                   i18n-buttonText [buttonText]="idTopic ? 'Give us your opinion !' : ''" (buttonClick)="reactionService.showDialogCreateCB(idTopic)"
                   i18n-text text="No Clapback has been found !">

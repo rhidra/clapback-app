@@ -94,11 +94,15 @@ export class ReactionService {
     });
   }
 
-  searchByQuery(query: Query): Promise<void> {
+  searchByQuery(query: Query, page: number, pageSize: number = 5): Promise<void> {
     return this.authService.getToken().then(() => {
       return new Promise<void>((resolve, reject) => {
-        this.http.get(env.apiUrl + 'reaction', {params: {populate: true, tags: query.hashtags}} as any).subscribe((data: any) => {
-          this.reactions = data;
+        this.http.get(env.apiUrl + 'reaction', {params: {populate: true, tags: query.hashtags, page, pageSize}} as any).subscribe((data: any) => {
+          if (page === 0 || this.reactions.length === 0) {
+            this.reactions = data;
+          } else {
+            data.forEach(react => !this.reactions.find(r => react._id === r._id) ? this.reactions.push(react) : null);
+          }
           resolve();
         }, () => reject());
       });

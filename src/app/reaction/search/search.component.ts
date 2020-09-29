@@ -17,6 +17,9 @@ export class ReactSearchComponent implements OnInit {
   isLoading;
   noConnection: boolean = false;
   searchbarContent: string;
+  page: number = 0;
+  currentQuery: Query = null;
+  pendingQuery: Promise<void> = Promise.resolve();
 
   constructor(
     public reactionService: ReactionService,
@@ -34,6 +37,7 @@ export class ReactSearchComponent implements OnInit {
         this.titleHashtag = q.hashtags[0];
         this.search(q);
       } else {
+        this.page = 0;
         this.reactionService.clear();
       }
     });
@@ -51,15 +55,33 @@ export class ReactSearchComponent implements OnInit {
   }
 
   search(q: Query) {
+    this.page = 0;
     this.isLoading = true;
-    this.reactionService.searchByQuery(q)
-      .then(() => {
-        this.isLoading = false;
-        this.noConnection = false;
-      })
-      .catch(() => {
-        this.isLoading = false;
-        this.noConnection = true;
-      });
+    this.currentQuery = q;
+    this.loadMoreReactions();
+  }
+
+  async loadMoreReactions(event?) {
+    if (this.currentQuery) {
+      this.pendingQuery = this.pendingQuery.then(() => this.loadReactions(event));
+    }
+  }
+
+  async loadReactions(event?) {
+    const oldLength = this.reactionService.reactions.length;
+    try {
+      await this.reactionService.searchByQuery(this.currentQuery, this.page);
+      if (oldLength !== this.reactionService.reactions.length) {
+        this.page++;
+      }
+      this.isLoading = false;
+      this.noConnection = false;
+      if (event) {
+        event.target.complete();
+      }
+    } catch (e) {
+      this.isLoading = false;
+      this.noConnection = true;
+    }
   }
 }
