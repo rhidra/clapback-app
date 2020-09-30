@@ -15,6 +15,7 @@ export class GridMainComponent implements OnInit {
   isLoadingReactions = true;
   isOwn = false;
   user: User;
+  page = 0;
 
   constructor(
     public authService: AuthService,
@@ -37,14 +38,24 @@ export class GridMainComponent implements OnInit {
         this.isOwn = true;
         this.isLoading = false;
       }
-
-      await this.reactionService.searchByUser(this.user, this.isOwn);
-      this.isLoadingReactions = false;
+      this.loadMoreReactions();
     });
   }
 
   uploadNewProfilePic(image: any) {
     this.user.image = image;
     this.userService.edit(this.user);
+  }
+
+  async loadMoreReactions(event?) {
+    const oldLength = this.reactionService.reactions.length;
+    await this.reactionService.searchByUser(this.user, this.isOwn, this.page);
+    this.isLoadingReactions = false;
+    if (oldLength !== this.reactionService.reactions.length) {
+      this.page++;
+    }
+    if (event) {
+      event.target.complete();
+    }
   }
 }

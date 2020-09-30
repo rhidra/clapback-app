@@ -67,6 +67,11 @@
         </div>
       </ion-col>
     </ion-row>
+
+    <ion-infinite-scroll threshold="10px" (ionInfinite)="loadMoreReactions($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </ion-grid>
 
   <app-empty-view *ngIf="!isLoadingReactions && reactionService.reactions.length === 0"

@@ -71,11 +71,15 @@ export class ReactionService {
     });
   }
 
-  searchByUser(user: User, includeProcessing: boolean = false): Promise<void> {
+  searchByUser(user: User, includeProcessing: boolean = false, page: number, pageSize: number = 12): Promise<void> {
     return this.authService.getToken().then(() => {
       return new Promise<void>((resolve, reject) => {
-        this.http.get(env.apiUrl + 'reaction', {params: {user: user._id, isProcessing: includeProcessing}} as any).subscribe((data: any) => {
-          this.reactions = data;
+        this.http.get(env.apiUrl + 'reaction', {params: {user: user._id, isProcessing: includeProcessing, page, pageSize}} as any).subscribe((data: any) => {
+          if (page === 0 || this.reactions.length === 0) {
+            this.reactions = data;
+          } else {
+            data.forEach(react => !this.reactions.find(r => react._id === r._id) ? this.reactions.push(react) : null);
+          }
           this.reactions.forEach(r => r.user = user);
           resolve();
         }, () => reject());
@@ -94,7 +98,7 @@ export class ReactionService {
     });
   }
 
-  searchByQuery(query: Query, page: number, pageSize: number = 5): Promise<void> {
+  searchByQuery(query: Query, page: number, pageSize: number = 10): Promise<void> {
     return this.authService.getToken().then(() => {
       return new Promise<void>((resolve, reject) => {
         this.http.get(env.apiUrl + 'reaction', {params: {populate: true, tags: query.hashtags, page, pageSize}} as any).subscribe((data: any) => {
