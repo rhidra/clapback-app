@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "373767670467",
+    "firebase_url": "https://zuoyou-456ad.firebaseio.com",
+    "project_id": "zuoyou-456ad",
+    "storage_bucket": "zuoyou-456ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373767670467:android:9dc41c83104d66bc8bb076",
+        "android_client_info": {
+          "package_name": "com.zuoyoubycurios.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373767670467-0d7s4bi5efhknccqtn6hvrphid1n4s5l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB50hXiZ9ufcZHUtJt0StV9DX3juEGiF9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373767670467-0d7s4bi5efhknccqtn6hvrphid1n4s5l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
