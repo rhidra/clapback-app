@@ -1,4 +1,12 @@
 <div class="app-reaction-camera">
+  <ion-header class="transparent-gradient">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
   <div class="record-fab">
     <div class="record-button">
       <ion-button (click)="!isRecording ? startRecording() : stopRecording()" slot="icon-only">
