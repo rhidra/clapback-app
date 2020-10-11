@@ -39,13 +39,15 @@ export class LoginComponent implements OnInit {
   }
 
   ionViewDidEnter() {
-    firebase.initializeApp(env.firebase);
-    this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-      size: 'invisible',
-      callback: () => {
-        this.sendCode();
-      }
-    });
+    if (!firebase.apps.length) {
+      firebase.initializeApp(env.firebase);
+      this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+        size: 'invisible',
+        callback: () => {
+          this.sendCode();
+        }
+      });
+    }
   }
 
   initForm() {
