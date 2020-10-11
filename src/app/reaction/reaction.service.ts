@@ -29,36 +29,6 @@ export class ReactionService {
     private authService: AuthService,
   ) { }
 
-  async showDialogCreateCB(idTopic) {
-    const alert = await this.alertCtrl.create({
-      header: 'Clapback',
-      message: 'How do you want to make a Clapback ?',
-      buttons: [{
-        text: 'Open camera',
-        handler: () => {
-          this.mediaCapture.captureVideo().then((data: Array<MediaFile>) => {
-            this.setPendingMediaUrl(data[0].fullPath);
-            this.navCtrl.navigateForward(['/', 'reaction', 'upload', idTopic]);
-          });
-        },
-      }, {
-        text: 'Search files',
-        handler: () => {
-          // TODO: Use another plugin for iOS (iOS Cordova File Picker)
-          this.fileChooser.open({mime: 'video/mp4'})
-            .then(uri => this.filePath.resolveNativePath(uri))
-            .then(uri => {
-              this.setPendingMediaUrl(uri);
-              this.navCtrl.navigateForward(['/', 'reaction', 'upload', idTopic]);
-            })
-            .catch(err => console.error(err));
-        },
-      }]
-    });
-
-    await alert.present();
-  }
-
   create(reaction: Reaction): Promise<Reaction> {
     return new Promise<Reaction>(resolve => {
       this.http.post(env.apiUrl + 'reaction/', reaction).subscribe((data: any) => resolve(data));

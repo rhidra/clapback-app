@@ -88,6 +88,7 @@ export class ReactCameraComponent implements OnInit {
   }
 
   chooseFile() {
+    // TODO: Use another plugin for iOS (iOS Cordova File Picker)
     this.fileChooser.open({mime: 'video/mp4'})
       .then(uri => this.filePath.resolveNativePath(uri))
       .then(uri => {
