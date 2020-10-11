@@ -18,6 +18,7 @@ import {MediaUrlPipe} from "../utils/pipes/media-url.pipe";
 import {ReactCommentListComponent} from "./comment-list/comment-list.component";
 import {ReactCameraComponent} from "./camera/camera.component";
 import {CameraPreview} from '@ionic-native/camera-preview/ngx';
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {CameraPreview} from '@ionic-native/camera-preview/ngx';
     VgBufferingModule,
     FormsModule,
     UtilsModule,
-    Nl2BrPipeModule
+    Nl2BrPipeModule,
+    FontAwesomeModule
   ],
   providers: [
     MediaUrlPipe,

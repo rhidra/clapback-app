@@ -1,9 +1,9 @@
-$size-sm: 45px;
-$size-lg: 60px;
+$btn-size-sm: 45px;
+$btn-size-lg: 60px;
 
 ion-button.btn-icon-small {
-  width: $size-sm;
-  height: $size-sm;
+  width: $btn-size-sm;
+  height: $btn-size-sm;
   font-size: 11px; // TODO: Put in variable
   padding-bottom: offset-level(1);
   --opacity: .6;
@@ -31,8 +31,8 @@ ion-button.btn-small-text {
 }
 
 ion-button.btn-icon-large {
-  width: $size-lg;
-  height: $size-lg;
+  width: $btn-size-lg;
+  height: $btn-size-lg;
   --border-radius: 43px;
   ion-icon {
     transform: scale(1.5);

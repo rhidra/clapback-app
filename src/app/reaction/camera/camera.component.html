@@ -1,4 +1,10 @@
-<p>
-  <ion-button (click)="startRecording()">Record !</ion-button><br/>
-  <ion-button (click)="stopRecording()">Stop recording</ion-button>
-</p>
+<div class="app-reaction-camera">
+  <div class="record-fab">
+    <div class="record-button">
+      <ion-button (click)="!isRecording ? startRecording() : stopRecording()" slot="icon-only">
+        <fa-icon *ngIf="!isRecording" [icon]="['fas', 'circle']" size="2x"></fa-icon>
+        <fa-icon *ngIf="isRecording" [icon]="['fas', 'stop']" size="2x"></fa-icon>
+      </ion-button>
+    </div>
+  </div>
+</div>

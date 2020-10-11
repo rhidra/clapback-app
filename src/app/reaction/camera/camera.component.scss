@@ -1,0 +1,15 @@
+.app-reaction-camera {
+  .record-fab {
+    position: absolute;
+    bottom: 5%;
+    width: 100%;
+
+    .record-button {
+      margin: 0 auto;
+      width: $btn-size-lg;
+      ion-button {
+        @extend .btn-icon-large;
+      }
+    }
+  }
+}
