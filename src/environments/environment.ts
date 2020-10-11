@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://192.168.1.33:9000/',
-  mediaHost: 'http://192.168.1.33:9000',
+  apiUrl: 'http://192.168.43.29:9000/',
+  mediaHost: 'http://192.168.43.29:9000',
   firebase: {
     apiKey: "AIzaSyB8ADk1r9qWGhMhg3--yZXeU001B9ned6M",
     authDomain: "zuoyou-456ad.firebaseapp.com",
@@ -15,7 +15,7 @@ export const environment = {
     messagingSenderId: "373767670467",
     appId: "1:373767670467:web:c46b9585fe805d758bb076",
     measurementId: "G-KC5DJHGG8J"
-  }
+  },
 
   //apiUrl: 'http://localhost:9000/',
   //mediaHost: 'http://localhost:9000',
