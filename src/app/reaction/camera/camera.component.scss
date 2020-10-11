@@ -12,4 +12,17 @@
       }
     }
   }
+
+  .gallery-button, .switch-button {
+    position: absolute;
+    bottom: 5%;
+    @extend .margin-left;
+    ion-button {
+      @extend .btn-icon-small;
+    }
+  }
+
+  .switch-button {
+    right: 12px;
+  }
 }

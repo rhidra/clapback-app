@@ -7,4 +7,16 @@
       </ion-button>
     </div>
   </div>
+
+  <div class="gallery-button">
+    <ion-button slot="icon-only">
+      <fa-icon [icon]="['fas', 'images']" size="2x"></fa-icon>
+    </ion-button>
+  </div>
+
+  <div class="switch-button">
+    <ion-button slot="icon-only" (click)="switch()">
+      <fa-icon [icon]="['fas', 'undo']" size="2x"></fa-icon>
+    </ion-button>
+  </div>
 </div>
