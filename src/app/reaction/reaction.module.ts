@@ -16,6 +16,7 @@ import {UtilsModule} from '../utils/utils.module';
 import {Nl2BrPipeModule} from 'nl2br-pipe';
 import {MediaUrlPipe} from "../utils/pipes/media-url.pipe";
 import {ReactCommentListComponent} from "./comment-list/comment-list.component";
+import {ReactCameraComponent} from "./camera/camera.component";
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import {ReactCommentListComponent} from "./comment-list/comment-list.component";
     ReactCommentComponent,
     ReactAddCommentComponent,
     ReactCommentListComponent,
+    ReactCameraComponent,
   ],
   imports: [
     CommonModule,
