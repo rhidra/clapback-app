@@ -17,16 +17,6 @@
 <ion-content>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
     <ion-list>
-      <ion-item *ngIf="mediaUrl">
-        <ion-avatar slot="start">
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-        </ion-avatar>
-        <ion-label>
-          <h2>{{mediaUrl}}</h2>
-          <h3>{{mediaUrl}}</h3>
-        </ion-label>
-      </ion-item>
-
       <ion-item>
         <ion-label position="floating" i18n>Add a description...</ion-label>
         <ion-textarea formControlName="text"></ion-textarea>

@@ -8,8 +8,8 @@ import {ReactCameraComponent} from "./camera/camera.component";
 
 
 const routes: Routes = [
-  { path: 'camera', component: ReactCameraComponent },
-  { path: 'camera/:idTopic', component: ReactCameraComponent },
+  { path: 'camera', component: ReactCameraComponent, canActivate: [AuthGuardService] },
+  { path: 'camera/:idTopic', component: ReactCameraComponent, canActivate: [AuthGuardService] },
   { path: 'upload/:idTopic', component: ReactVideoEditComponent, canActivate: [AuthGuardService] },
   { path: 'edit/:idReaction', component: ReactVideoEditComponent, canActivate: [AuthGuardService] },
   { path: ':idTopic', component: ReactSearchComponent },

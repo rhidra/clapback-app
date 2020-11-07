@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {environment as env} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Reaction} from '../../models/reaction.model';
 import * as moment from 'moment';
@@ -11,8 +10,8 @@ import {ActivatedRoute} from '@angular/router';
 import {File} from '@ionic-native/file/ngx';
 import {Topic} from '../../models/topic.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { MediaService } from 'src/app/media/media.service';
 import {LocalNotifications} from '@ionic-native/local-notifications/ngx';
-declare var FileTransferManager: any;
 
 @Component({
   selector: 'app-video-edit',
@@ -32,12 +31,10 @@ export class ReactVideoEditComponent implements OnInit {
     private authService: AuthService,
     private reactionService: ReactionService,
     private navCtrl: NavController,
-    private http: HttpClient,
-    private file: File,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private feedService: NewsFeedService,
-    private toastCtrl: ToastController,
+    private mediaService: MediaService,
     private loadingCtrl: LoadingController,
     private notifications: LocalNotifications,
   ) { }
@@ -60,7 +57,7 @@ export class ReactVideoEditComponent implements OnInit {
           .then(() => this.initForm());
       }
     });
-    this.mediaUrl = this.reactionService.getPendingMediaUrl();
+    this.mediaUrl = this.mediaService.getPendingMediaUrl();
     this.loadingCtrl.create({message: 'Please wait...'}).then(l => this.loading = l);
   }
 
@@ -72,47 +69,28 @@ export class ReactVideoEditComponent implements OnInit {
     this.isLoading = false;
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.isCreation) {
-      this.authService.onAuthenticated(true)
-        .then(() => this.uploadVideo());
+      await this.authService.onAuthenticated(true);
+      console.log('request filename');
+      const filename = await this.mediaService.allocateFilename(this.mediaUrl);
+      console.log('filename:', filename);
+      await this.createReaction(filename);
+      console.log('reaction created');
+      this.mediaService.uploadVideo(filename, this.mediaUrl)
+        .then(() => this.notifications.schedule({id: 1, title: 'Clapback successfully published !'}))
+        .catch(() => this.notifications.schedule({id: 1, title: 'Error: Clapback not uploaded !'}));
+      console.log('upload started');
+      this.navCtrl.navigateRoot('/');
     } else {
       Object.assign(this.reaction, this.form.value);
-      return this.reactionService.edit(this.reaction).then(() => this.navCtrl.pop());
+      await this.reactionService.edit(this.reaction);
+      return this.navCtrl.pop();
     }
   }
 
-  uploadVideo() {
-    const uploader = FileTransferManager.init();
-
-    uploader.on('success', (upload) => {
-      if (upload.state === 'UPLOADED') {
-        this.uploadDone(JSON.parse(upload.serverResponse).filename);
-      }
-    });
-
-    uploader.on('error', (uploadException) => {
-      this.notifications.schedule({id: 1, title: 'Error: Clapback not uploaded !'});
-    });
-
-    uploader.startUpload({
-      id: this.authService.user._id + this.topic._id,
-      filePath: this.mediaUrl,
-      fileKey: 'media',
-      serverUrl: env.apiUrl + 'media',
-      showNotification: true,
-      notificationTitle: 'Uploading clapback ...',
-      headers: {
-        Authorization: `Bearer ${this.authService.accessToken}`,
-      }
-    });
-
-    this.navCtrl.navigateRoot('/');
-  }
-
-  uploadDone(filename: string) {
+  async createReaction(filename: string) {
     this.reaction = new Reaction();
-    this.reaction.date = moment().toISOString();
     this.reaction.video = filename;
     this.reaction.text = this.form.value.text;
     this.reaction.hashtags = this.form.value.hashtags;
@@ -120,7 +98,6 @@ export class ReactVideoEditComponent implements OnInit {
     this.reaction.topic = this.topic._id;
     this.reaction.isPublic = true;
 
-    return this.reactionService.create(this.reaction)
-      .then(() => this.notifications.schedule({id: 1, title: 'Clapback successfully published !'}));
+    return await this.reactionService.create(this.reaction);
   }
 }

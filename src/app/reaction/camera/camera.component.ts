@@ -5,6 +5,7 @@ import {ReactionService} from "../reaction.service";
 import {ActivatedRoute} from "@angular/router";
 import {FileChooser} from "@ionic-native/file-chooser/ngx";
 import {FilePath} from "@ionic-native/file-path/ngx";
+import { MediaService } from 'src/app/media/media.service';
 
 @Component({
   selector: 'app-camera',
@@ -19,7 +20,7 @@ export class ReactCameraComponent implements OnInit {
   constructor(
     private cameraPreview: CameraPreview,
     private platform: Platform,
-    private reactionService: ReactionService,
+    private mediaService: MediaService,
     private navCtrl: NavController,
     private activatedRoute: ActivatedRoute,
     private fileChooser: FileChooser,
@@ -75,7 +76,7 @@ export class ReactCameraComponent implements OnInit {
     this.isRecording = false;
     this.cameraPreview.stopRecordVideo()
       .then(path => {
-        this.reactionService.setPendingMediaUrl(path);
+        this.mediaService.setPendingMediaUrl(path);
         this.navCtrl.navigateForward(['/', 'reaction', 'upload', this.idTopic]);
       })
       .catch(error => console.error(error));
@@ -92,7 +93,7 @@ export class ReactCameraComponent implements OnInit {
     this.fileChooser.open({mime: 'video/mp4'})
       .then(uri => this.filePath.resolveNativePath(uri))
       .then(uri => {
-        this.reactionService.setPendingMediaUrl(uri);
+        this.mediaService.setPendingMediaUrl(uri);
         this.navCtrl.navigateForward(['/', 'reaction', 'upload', this.idTopic]);
       })
       .catch(err => console.error(err));

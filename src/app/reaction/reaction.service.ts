@@ -16,7 +16,6 @@ import {User} from '../models/user.model';
 })
 export class ReactionService {
 
-  url: string;
   reactions: Array<Reaction> = [];
 
   constructor(
@@ -125,15 +124,5 @@ export class ReactionService {
         resolve();
       });
     });
-  }
-
-  setPendingMediaUrl(url: string) {
-    this.url = url;
-  }
-
-  getPendingMediaUrl(): string {
-    const u: string = this.url;
-    this.url = null;
-    return u;
   }
 }
