@@ -10,6 +10,7 @@ import {AuthService} from '../auth/auth.service';
 import {Query} from '../utils/query.service';
 import {UserService} from '../grid/user.service';
 import {User} from '../models/user.model';
+import { resolve } from 'core-js/fn/promise';
 
 @Injectable({
   providedIn: 'root'
@@ -124,5 +125,14 @@ export class ReactionService {
         resolve();
       });
     });
+  }
+
+  delete(id: string): Promise<void> {
+    return new Promise<void>(resolve => {
+      this.http.delete(env.apiUrl + 'reaction/' + id).subscribe(() => {
+        this.reactions = this.reactions.filter(r => r._id !== id);
+        resolve();
+      });
+    })
   }
 }

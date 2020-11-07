@@ -7,6 +7,7 @@ import {AuthService} from '../../auth/auth.service';
 import {animate, keyframes, state, style, transition, trigger} from '@angular/animations';
 import {User} from '../../models/user.model';
 import {MediaUrlPipe} from "../../utils/pipes/media-url.pipe";
+import { AlertController, NavController } from '@ionic/angular';
 
 declare var Hls;
 
@@ -44,10 +45,12 @@ export class ReactDetailComponent implements OnInit, AfterViewInit {
   heartState: string = 'notLiked';
 
   constructor(
+    private alertCtrl: AlertController,
     public activatedRoute: ActivatedRoute,
     public reactionService: ReactionService,
     public authService: AuthService,
     public mediaUrl: MediaUrlPipe,
+    public navCtrl: NavController,
   ) { }
 
   ngOnInit() {}
@@ -106,5 +109,25 @@ export class ReactDetailComponent implements OnInit, AfterViewInit {
       this.videoPlayer.seekTime(this.videoPlayer.currentTime - 5);
       this.videoPlayer.play();
     }
+  }
+
+  async delete() {
+    const alert = await this.alertCtrl.create({
+      header: 'Delete Clapback',
+      message: 'Are you you want to delete this clapback ?',
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel',
+        cssClass: 'secondary',
+      }, {
+        text: 'Delete',
+        handler: () => {
+          this.reactionService.delete(this.reaction._id);
+          this.navCtrl.back();
+        },
+      }]
+    });
+
+    await alert.present();
   }
 }

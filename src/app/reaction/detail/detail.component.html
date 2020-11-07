@@ -7,6 +7,9 @@
       <ion-button [routerLink]="['/', 'reaction', 'edit', reaction._id]">
         <ion-icon slot="icon-only" color="primary" name="create"></ion-icon>
       </ion-button>
+      <ion-button (click)="delete()" >
+        <ion-icon slot="icon-only" color="primary" name="trash"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title i18n>Clapback</ion-title>
   </ion-toolbar>
