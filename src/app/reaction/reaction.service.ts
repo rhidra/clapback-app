@@ -2,15 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment as env} from '../../environments/environment';
 import {Reaction} from '../models/reaction.model';
-import {MediaCapture, MediaFile} from '@ionic-native/media-capture/ngx';
-import {AlertController, NavController} from '@ionic/angular';
-import {FileChooser} from '@ionic-native/file-chooser/ngx';
-import {FilePath} from '@ionic-native/file-path/ngx';
 import {AuthService} from '../auth/auth.service';
 import {Query} from '../utils/query.service';
-import {UserService} from '../grid/user.service';
 import {User} from '../models/user.model';
-import { resolve } from 'core-js/fn/promise';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +14,7 @@ export class ReactionService {
   reactions: Array<Reaction> = [];
 
   constructor(
-    private alertCtrl: AlertController,
     private http: HttpClient,
-    private mediaCapture: MediaCapture,
-    private fileChooser: FileChooser,
-    private filePath: FilePath,
-    private navCtrl: NavController,
     private authService: AuthService,
   ) { }
 
@@ -41,10 +30,10 @@ export class ReactionService {
     });
   }
 
-  searchByUser(user: User, includeProcessing: boolean = false, page: number, pageSize: number = 12): Promise<void> {
+  searchByUser(user: User, includeProcessing: boolean = false, page: number = 0, pageSize: number = 12): Promise<void> {
     return this.authService.getToken().then(() => {
       return new Promise<void>((resolve, reject) => {
-        this.http.get(env.apiUrl + 'reaction', {params: {user: user._id, isProcessing: includeProcessing, page, pageSize}} as any).subscribe((data: any) => {
+        this.http.get(env.apiUrl + 'reaction', {params: {user: user._id, isProcessing: includeProcessing, page, pageSize, sort: -1}} as any).subscribe((data: any) => {
           if (page === 0 || this.reactions.length === 0) {
             this.reactions = data;
           } else {
