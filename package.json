@@ -49,6 +49,7 @@
     "cordova-plugin-filechooser": "~1.2.0",
     "cordova-plugin-filepath": "~1.5.8",
     "cordova-plugin-local-notification": "~0.9.0-beta.2",
+    "cordova-plugin-media-capture": "^3.0.3",
     "cordova-plugin-nativestorage": "~2.3.2",
     "core-js": "~2.6.0",
     "firebase": "~7.19.1",
@@ -117,7 +118,8 @@
       "cordova-plugin-file": {},
       "cordova-plugin-filepath": {},
       "cordova-plugin-background-upload": {},
-      "cordova-plugin-camera-preview": {}
+      "cordova-plugin-camera-preview": {},
+      "cordova-plugin-media-capture": {}
     },
     "platforms": [
       "browser",

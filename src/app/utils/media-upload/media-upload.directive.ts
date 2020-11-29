@@ -48,7 +48,7 @@ export class MediaUploadDirective {
         text: 'Search files',
         handler: () => {
           // TODO: Use another plugin for iOS (iOS Cordova File Picker)
-          this.fileChooser.open({mime: 'video/mp4'})
+          this.fileChooser.open()
             .then(uri => this.filePath.resolveNativePath(uri))
             .then(uri => this.setNewProfilePic(uri))
             .catch(err => console.error(err));
