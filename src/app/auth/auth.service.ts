@@ -111,6 +111,31 @@ export class AuthService {
     });
   }
 
+  loginEmail(email: string, password: string) {
+    return new Promise((resolve, reject) => {
+      this.http.post(env.apiUrl + 'auth/login/check', {email})
+        .subscribe(() => {
+          // Login
+          this.http.post(env.apiUrl + 'auth/login', {email, password}).subscribe((res: any) => {
+            this.refreshToken = res.refreshToken;
+            this.user = new User();
+            Object.assign(this.user, res.user);
+            this.accessToken = res.token;
+            this.saveInStorage().then(resolve).catch(reject);
+          });
+        }, () => {
+          // Registration
+          this.http.post(env.apiUrl + 'auth/register', {email, password}).subscribe((res: any) => {
+            this.refreshToken = res.refreshToken;
+            this.user = new User();
+            Object.assign(this.user, res.user);
+            this.accessToken = res.token;
+            this.saveInStorage().then(resolve).catch(reject);
+          });
+        })
+    });
+  }
+
   logout() {
     const p = [];
     if (this.platform.is('hybrid')) {

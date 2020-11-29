@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
-import {LoginComponent} from './login/login.component';
+import {LoginEmailComponent} from './login-email/login.component';
 import {IonicModule} from '@ionic/angular';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UtilsModule} from '../utils/utils.module';
@@ -10,7 +10,7 @@ import {UtilsModule} from '../utils/utils.module';
 
 @NgModule({
   declarations: [
-    LoginComponent,
+    LoginEmailComponent,
   ],
   imports: [
     CommonModule,

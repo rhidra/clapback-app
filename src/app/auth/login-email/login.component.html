@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title i18n>Login with email</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-login">
+  <form [formGroup]="form" (ngSubmit)="login()" autocomplete="off">
+    <ion-list inset padding>
+      <ion-item>
+        <ion-input placeholder="email@example.com" i18n-placeholder formControlName="email" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input placeholder="••••••" i18n-placeholder formControlName="password" type="password"></ion-input>
+      </ion-item>
+
+      <div *ngIf="form.errors" class="alert alert-danger">{{form.errors}}</div>
+      <ion-button class="submit-btn" expand="block" type="submit"
+                  [disabled]="!form.valid" i18n>
+        Login
+      </ion-button>
+    </ion-list>
+  </form>
+</ion-content>
