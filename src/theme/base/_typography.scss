@@ -6,10 +6,37 @@
   );
 }
 
+// Deprecated chinese font
 @font-face {
   font-family: 'Hanzipen';
   src: url('./assets/fonts/hanzipen.otf');
 }
+
+// Chinese main font
+@font-face {
+  font-family: 'Noto Sans SC';
+  src: url('./assets/fonts/NotoSansSC-Regular.otf');
+}
+@font-face {
+  font-family: 'Noto Sans SC Black';
+  src: url('./assets/fonts/NotoSansSC-Black.otf');
+}
+
+// Main Intl font
+@font-face {
+  font-family: 'Sequel Sans Black';
+  // src: url('./assets/fonts/SequelSans-Black.otf') format('opentype');
+  src: url('./assets/fonts/SequelSans-Black.ttf');
+}
+@font-face {
+  font-family: 'Sequel Sans Light';
+  src: url('./assets/fonts/SequelSans-Book.ttf');
+}
+@font-face {
+  font-family: 'Sequel Sans Semi Bold';
+  src: url('./assets/fonts/SequelSans-SemiBold.ttf');
+}
+
 
 @function font-size($level) {
   @return map-get($level, font-size);
@@ -32,6 +59,12 @@ $small-icon:    typography-level(1.4em);
 $small-text:    typography-level(.8em);
 $very-small-text:    typography-level(.6em);
 
+
+* {
+  font-family: 'Sequel Sans Light', serif;
+  letter-spacing: 1px;
+  vertical-align: baseline;
+}
 
 .text-center {
   text-align: center;
