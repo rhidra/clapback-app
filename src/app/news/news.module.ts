@@ -17,7 +17,7 @@ import {QuizService} from './quiz.service';
 import {UtilsModule} from '../utils/utils.module';
 import {Nl2BrPipeModule} from 'nl2br-pipe';
 import {MediaUrlPipe} from "../utils/pipes/media-url.pipe";
-
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @NgModule({
   declarations: [
@@ -42,6 +42,7 @@ import {MediaUrlPipe} from "../utils/pipes/media-url.pipe";
     NewsFeedService,
     QuizService,
     MediaUrlPipe,
+    SocialSharing,
   ]
 })
 export class NewsModule { }

@@ -4,7 +4,7 @@
     </div>
 
     <div class="full-video-side-buttons">
-        <ion-button>
+        <ion-button (click)="share()">
             <ion-icon slot="icon-only" name="share"></ion-icon>
         </ion-button>
         <ion-button [ngClass]="{'liked': topic.hasLiked}" (click)="like()">

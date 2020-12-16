@@ -6,6 +6,7 @@ import {SwiperComponent} from 'angular2-useful-swiper';
 import {AuthService} from '../../auth/auth.service';
 import {NewsFeedService} from '../feed.service';
 import {ReactionService} from '../../reaction/reaction.service';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
   selector: 'app-news-topic',
@@ -52,6 +53,7 @@ export class TopicComponent {
     public authService: AuthService,
     public feedService: NewsFeedService,
     public reactionService: ReactionService,
+    private socialSharing: SocialSharing,
   ) { }
 
   startViewing() {
@@ -92,6 +94,14 @@ export class TopicComponent {
       }
       this.topic.hasLiked = !this.topic.hasLiked;
       this.heartState = this.topic.hasLiked ? 'liked' : 'notLiked';
+    });
+  }
+
+  share() {
+    this.socialSharing.shareWithOptions({
+      message: 'I saw this very cool news on Clapback today !',
+      subject: 'Look at this news !',
+      url: 'clapbacktheapp.com',
     });
   }
 
