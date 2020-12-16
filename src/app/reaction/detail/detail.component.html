@@ -46,6 +46,10 @@
       </div> -->
     </div>
 
+    <div class="full-video-pause-overlay" *ngIf="videoPaused">
+      <ion-icon name="play"></ion-icon>
+    </div>
+
     <vg-player class="full-video full-height" (onPlayerReady)="onPlayerReady($event)">
       <vg-buffering></vg-buffering>
       <vg-scrub-bar>

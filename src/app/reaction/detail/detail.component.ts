@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ReactionService} from '../reaction.service';
 import {Reaction} from '../../models/reaction.model';
@@ -44,6 +44,7 @@ export class ReactDetailComponent implements OnInit, AfterViewInit {
   comment: string;
   canEdit: boolean = false;
   heartState: string = 'notLiked';
+  videoPaused: boolean = false;
 
   constructor(
     private alertCtrl: AlertController,
@@ -92,6 +93,17 @@ export class ReactDetailComponent implements OnInit, AfterViewInit {
   onPlayerReady(api: VgAPI) {
     this.videoPlayer = api;
     this.videoPlayer.play();
+  }
+
+  @HostListener('document:touchstart', ['$event'])
+  startTappingText(event) {
+    if (this.videoPlayer && this.videoPlayer.state === 'playing') {
+      this.videoPlayer.pause();
+      this.videoPaused = true;
+    } else if (this.videoPlayer) {
+      this.videoPlayer.play();
+      this.videoPaused = false;
+    }
   }
 
   like() {
