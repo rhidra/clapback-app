@@ -6,6 +6,9 @@ export const environment = {
   production: false,
   apiUrl: 'http://192.168.43.29:9000/',
   mediaHost: 'http://192.168.43.29:9000',
+  // apiUrl: 'https://api.clapbacktheapp.com/',
+  // mediaHost: 'https://api.clapbacktheapp.com',
+  
   firebase: {
     apiKey: "AIzaSyB8ADk1r9qWGhMhg3--yZXeU001B9ned6M",
     authDomain: "zuoyou-456ad.firebaseapp.com",
