@@ -61,6 +61,19 @@
   }
 }
 
+.full-video-pause-overlay {
+  z-index: 15;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 7em;
+  opacity: .8;
+}
+
 // Panel with Img/Video + Text
 .half-text {
   ion-img {

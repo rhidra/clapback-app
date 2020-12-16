@@ -31,6 +31,7 @@ export class PanelComponent implements OnInit, AfterViewInit {
   type: string;
   tappingText: boolean = false;
   videoPlayer: VgAPI = null;
+  videoPaused: boolean = false;
   quiz: Quiz;
   quizChoice: string;
   isActive = false;
@@ -92,6 +93,14 @@ export class PanelComponent implements OnInit, AfterViewInit {
   startTappingText(event) {
     if (this.isActive && this.type === 'text') {
       this.ngZone.run(() => this.tappingText = true);
+    } else if (this.isActive && this.type === 'video' && this.videoPlayer) {
+      if (this.videoPlayer.state === 'playing') {
+        this.videoPlayer.pause();
+        this.videoPaused = true;
+      } else {
+        this.videoPlayer.play();
+        this.videoPaused = false;
+      }
     }
   }
 
