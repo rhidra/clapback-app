@@ -101,7 +101,7 @@ export class TopicComponent {
     this.socialSharing.shareWithOptions({
       message: 'I saw this very cool news on Clapback today !',
       subject: 'Look at this news !',
-      url: 'clapbacktheapp.com',
+      url: 'https://clapbacktheapp.com',
     });
   }
 
