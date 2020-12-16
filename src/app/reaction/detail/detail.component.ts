@@ -8,6 +8,7 @@ import {animate, keyframes, state, style, transition, trigger} from '@angular/an
 import {User} from '../../models/user.model';
 import {MediaUrlPipe} from "../../utils/pipes/media-url.pipe";
 import { AlertController, NavController } from '@ionic/angular';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 declare var Hls;
 
@@ -51,6 +52,7 @@ export class ReactDetailComponent implements OnInit, AfterViewInit {
     public authService: AuthService,
     public mediaUrl: MediaUrlPipe,
     public navCtrl: NavController,
+    private socialSharing: SocialSharing,
   ) { }
 
   ngOnInit() {}
@@ -109,6 +111,14 @@ export class ReactDetailComponent implements OnInit, AfterViewInit {
       this.videoPlayer.seekTime(this.videoPlayer.currentTime - 5);
       this.videoPlayer.play();
     }
+  }
+
+  share() {
+    this.socialSharing.shareWithOptions({
+      message: 'I saw this very cool Clapback reaction ! It really makes you think...',
+      subject: 'Look at this clapback !',
+      url: 'https://clapbacktheapp.com',
+    });
   }
 
   async delete() {

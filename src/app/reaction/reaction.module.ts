@@ -19,6 +19,7 @@ import {ReactCommentListComponent} from "./comment-list/comment-list.component";
 import {ReactCameraComponent} from "./camera/camera.component";
 import {CameraPreview} from '@ionic-native/camera-preview/ngx';
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
   providers: [
     MediaUrlPipe,
     CameraPreview,
+    SocialSharing,
   ],
 })
 export class ReactionModule { }

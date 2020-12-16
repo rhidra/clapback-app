@@ -25,7 +25,7 @@
     
     <div class="full-video-side-buttons" *ngIf="!isLoading">
       <div>
-        <ion-button>
+        <ion-button (click)="share()">
           <ion-icon slot="icon-only" name="share"></ion-icon>
         </ion-button>
       </div>
