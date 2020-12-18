@@ -14,6 +14,7 @@ import { DoubleTapDirective } from './double-tap/double-tap.directive';
 import { MediaUrlPipe } from './pipes/media-url.pipe';
 import {IntlPhoneInputComponent} from './intl-phone-input/intl-phone-input.component';
 import {Ng2TelInputModule} from 'ng2-tel-input';
+import { SplashComponent } from './splash/splash.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
     DoubleTapDirective,
     MediaUrlPipe,
     IntlPhoneInputComponent,
+    SplashComponent,
   ],
   exports: [
     BoldPipe,
@@ -38,6 +40,7 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
     DoubleTapDirective,
     MediaUrlPipe,
     IntlPhoneInputComponent,
+    SplashComponent,
   ],
   imports: [
     CommonModule,
@@ -46,5 +49,8 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
     FormsModule,
     Ng2TelInputModule,
   ],
+  entryComponents: [
+    SplashComponent,
+  ]
 })
 export class UtilsModule { }

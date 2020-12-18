@@ -1,0 +1,13 @@
+.app-splash-screen {
+  --background: #E60014;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: 100%;
+    height: 100vh;
+    padding: 0 30%;
+    transform: scaleX(-1);
+  }
+}

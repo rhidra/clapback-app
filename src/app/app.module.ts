@@ -25,6 +25,7 @@ import {LocalNotifications} from '@ionic-native/local-notifications/ngx';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HAMMER_GESTURE_CONFIG, HammerGestureConfig} from '@angular/platform-browser';
 import {UtilsModule} from "./utils/utils.module";
+import { SplashComponent } from './utils/splash/splash.component';
 
 @Injectable()
 export class CustomHammerConfig extends HammerGestureConfig {
