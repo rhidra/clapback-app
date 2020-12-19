@@ -93,7 +93,18 @@ export class PanelComponent implements OnInit, AfterViewInit {
   startTappingText(event) {
     if (this.isActive && this.type === 'text') {
       this.ngZone.run(() => this.tappingText = true);
-    } else if (this.isActive && this.type === 'video' && this.videoPlayer) {
+    } 
+  }
+
+  @HostListener('document:touchend', ['$event'])
+  stopTappingText(event) {
+    if (this.isActive && this.type === 'text') {
+      this.ngZone.run(() => this.tappingText = false);
+    }
+  }
+
+  tapVideo() {
+    if (this.isActive && this.type === 'video' && this.videoPlayer) {
       if (this.videoPlayer.state === 'playing') {
         this.videoPlayer.pause();
         this.videoPaused = true;
@@ -101,13 +112,6 @@ export class PanelComponent implements OnInit, AfterViewInit {
         this.videoPlayer.play();
         this.videoPaused = false;
       }
-    }
-  }
-
-  @HostListener('document:touchend', ['$event'])
-  stopTappingText(event) {
-    if (this.isActive && this.type === 'text') {
-      this.ngZone.run(() => this.tappingText = false);
     }
   }
 

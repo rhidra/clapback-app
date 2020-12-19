@@ -1,7 +1,7 @@
 <div class="app-topic-panel full-height">
 
   <!-- VIDEO -->
-  <div class="full-height" *ngIf="type === 'video'">
+  <div class="full-height" *ngIf="type === 'video'" tappable (click)="tapVideo()">
 
     <div class="full-video-author margin-left-lg" *ngIf="panel && panel.author">
       <ion-avatar [routerLink]="['/', 'grid', panel.author._id]" class="pointer">
