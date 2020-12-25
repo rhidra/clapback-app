@@ -15,8 +15,8 @@ import {fas} from '@fortawesome/free-solid-svg-icons';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth/auth.interceptor';
 import {NativeStorage} from '@ionic-native/native-storage/ngx';
-import {MediaCapture} from '@ionic-native/media-capture/ngx';
-import {MediaCaptureMock} from '../mocks/media-capture';
+// import {MediaCapture} from '@ionic-native/media-capture/ngx';
+// import {MediaCaptureMock} from '../mocks/media-capture';
 import {FileChooser} from '@ionic-native/file-chooser/ngx';
 import {File} from '@ionic-native/file/ngx';
 import {FilePath} from '@ionic-native/file-path/ngx';
@@ -57,7 +57,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     FileChooser, // TODO: Make a mock for FileChooser plugin
     FilePath, // TODO: Make a mock for FilePath plugin
     LocalNotifications,
-    { provide: MediaCapture, useClass: window.hasOwnProperty('cordova') ? MediaCapture : MediaCaptureMock },
+    // { provide: MediaCapture, useClass: window.hasOwnProperty('cordova') ? MediaCapture : MediaCaptureMock },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },

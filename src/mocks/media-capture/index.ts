@@ -1,4 +1,4 @@
-import { MediaCapture } from '@ionic-native/media-capture/ngx';
+// import { MediaCapture } from '@ionic-native/media-capture/ngx';
 import {Observable, Observer} from 'rxjs';
 
 export interface MediaFile {
@@ -98,7 +98,7 @@ export interface ConfigurationData {
     width: number;
 }
 
-export class MediaCaptureMock extends MediaCapture {
+export class MediaCaptureMock /* extends MediaCapture */ {
     /**
      * The recording image sizes and formats supported by the device.
      */

@@ -1,5 +1,5 @@
 import {Directive, EventEmitter, HostListener, Input, Output} from '@angular/core';
-import {MediaCapture, MediaFile} from '@ionic-native/media-capture/ngx';
+// import {MediaCapture, MediaFile} from '@ionic-native/media-capture/ngx';
 import {environment as env} from '../../../environments/environment';
 import {HttpClient, HttpEventType} from '@angular/common/http';
 import {AlertController, LoadingController} from '@ionic/angular';
@@ -21,7 +21,7 @@ export class MediaUploadDirective {
 
   constructor(
     private alertCtrl: AlertController,
-    private mediaCapture: MediaCapture,
+    // private mediaCapture: MediaCapture,
     private fileChooser: FileChooser,
     private filePath: FilePath,
     private file: File,
@@ -41,8 +41,8 @@ export class MediaUploadDirective {
       buttons: [{
         text: 'Take photo',
         handler: () => {
-          this.mediaCapture.captureImage()
-            .then((data: Array<MediaFile>) => this.setNewProfilePic(data[0].fullPath));
+          // this.mediaCapture.captureImage()
+          //   .then((data: Array<MediaFile>) => this.setNewProfilePic(data[0].fullPath));
         },
       }, {
         text: 'Search files',

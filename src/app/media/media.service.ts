@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {environment as env} from '../../environments/environment';
-declare var FileTransferManager: any;
+declare var FileTransferManager: any; // https://github.com/spoonconsulting/cordova-plugin-background-upload
 import {LocalNotifications} from '@ionic-native/local-notifications/ngx';
 import { AuthService } from '../auth/auth.service';
 
